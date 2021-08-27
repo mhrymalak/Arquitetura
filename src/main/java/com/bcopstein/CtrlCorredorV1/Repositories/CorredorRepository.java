@@ -9,6 +9,4 @@ public interface CorredorRepository {
 
     List<Corredor> consultaCorredor();
     boolean cadastraCorredor(Corredor corredor);
-    List<Evento> consultaEventos();
-    boolean informaEvento(Evento evento);
 }

@@ -1,29 +1,24 @@
 package com.bcopstein.CtrlCorredorV1.Entities;
 
+import java.time.LocalDateTime;
+
 public class Evento {
     private int id;
     private String nome;
-    // Data do evento
-    private int dia;
-    private int mes;
-    private int ano;
     // Distancia percorrida
     private int distancia; // metros
-    // Tempo que o corredor levou para percorrer a distancia
-    private int horas;
-    private int minutos;
-    private int segundos;
+    // Data e tempo que o corredor levou para percorrer a distancia
+    private LocalDateTime dateTime;
     
     public Evento(int id,String nome, int dia, int mes, int ano, int distancia, int horas, int minutos, int segundos) {
         this.id = id;
         this.nome = nome;
-        this.dia = dia;
-        this.mes = mes;
-        this.ano = ano;
+        this.dateTime = LocalDateTime.of(ano, mes, dia, horas, minutos, segundos);
         this.distancia = distancia;
-        this.horas = horas;
-        this.minutos = minutos;
-        this.segundos = segundos;
+    }
+
+    public long getSecondsFromTime() {
+        return dateTime.toLocalTime().toSecondOfDay();
     }
 
     public int getId() {
@@ -35,15 +30,15 @@ public class Evento {
     }
 
     public int getDia() {
-        return dia;
+        return dateTime.getDayOfMonth();
     }
 
     public int getMes() {
-        return mes;
+        return dateTime.getMonthValue();
     }
 
     public int getAno() {
-        return ano;
+        return dateTime.getYear();
     }
 
     public int getDistancia() {
@@ -51,20 +46,20 @@ public class Evento {
     }
 
     public int getHoras() {
-        return horas;
+        return dateTime.getHour();
     }
 
     public int getMinutos() {
-        return minutos;
+        return dateTime.getMinute();
     }
 
     public int getSegundos() {
-        return segundos;
+        return dateTime.getSecond();
     }
 
     @Override
     public String toString() {
-        return "Evento [ano=" + ano + ", dia=" + dia + ", distancia=" + distancia + ", horas=" + horas + ", id=" + id
-                + ", mes=" + mes + ", minutos=" + minutos + ", nome=" + nome + ", segundos=" + segundos + "]";
+        return "Evento [ano=" + getAno() + ", dia=" + getDia() + ", distancia=" + distancia + ", horas=" + getHoras() + ", id=" + id
+                + ", mes=" + getMes() + ", minutos=" + getMinutos() + ", nome=" + nome + ", segundos=" + getSegundos() + "]";
     }
 }

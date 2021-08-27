@@ -3,49 +3,54 @@ package com.bcopstein.CtrlCorredorV1.Controllers;
 import java.util.List;
 
 import com.bcopstein.CtrlCorredorV1.Entities.Corredor;
+import com.bcopstein.CtrlCorredorV1.Entities.EstatísticasDTO;
 import com.bcopstein.CtrlCorredorV1.Entities.Evento;
 import com.bcopstein.CtrlCorredorV1.Repositories.CorredorRepository;
+import com.bcopstein.CtrlCorredorV1.Repositories.EventoRepository;
+import com.bcopstein.CtrlCorredorV1.Services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/ctrlCorridas")
 public class CorridasController {
 
-    private final CorredorRepository repository;
+    private final CorredorRepository corredorRepository;
+    private final EventoService eventoService;
 
     @Autowired
-    public CorridasController(CorredorRepository repository) {
-        this.repository = repository;
+    public CorridasController(CorredorRepository repository, EventoService eventoService) {
+        this.corredorRepository = repository;
+        this.eventoService = eventoService;
     }
 
     @GetMapping("/corredor")
     @CrossOrigin(origins = "*")
     public List<Corredor> consultaCorredor() {
-        return repository.consultaCorredor();
+        return corredorRepository.consultaCorredor();
     }
 
     @PostMapping("/corredor")
     @CrossOrigin(origins = "*")
     public boolean cadastraCorredor(@RequestBody final Corredor corredor) {
-        return repository.cadastraCorredor(corredor);
+        return corredorRepository.cadastraCorredor(corredor);
     }
 
     @GetMapping("/eventos")
     @CrossOrigin(origins = "*")
     public List<Evento> consultaEventos() {
-        return repository.consultaEventos();
+        return eventoService.findAll();
     }
 
     @PostMapping("/eventos") // adiciona evento no único corredor
     @CrossOrigin(origins = "*")
     public boolean informaEvento(@RequestBody final Evento evento) {
-        return repository.informaEvento(evento);
+        return eventoService.addEvento(evento);
+    }
+
+    @GetMapping("/estatisticas")
+    @CrossOrigin(origins = "*")
+    public EstatísticasDTO estatisticas(@RequestParam final int distancia){
+        return eventoService.estatisticas(distancia);
     }
 }
