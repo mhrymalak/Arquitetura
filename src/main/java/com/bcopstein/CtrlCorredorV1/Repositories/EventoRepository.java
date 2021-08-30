@@ -8,6 +8,7 @@ import java.util.List;
 @Repository
 public interface EventoRepository {
     List<Evento> findByDistancia(int distancia);
+    List<Evento> findByDistanciaAndAno(int distancia, int ano);
     List<Evento> findAll();
     boolean addEvento(Evento evento);
 }

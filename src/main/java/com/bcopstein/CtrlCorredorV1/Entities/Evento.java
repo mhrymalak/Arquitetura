@@ -21,6 +21,14 @@ public class Evento {
         return dateTime.toLocalTime().toSecondOfDay();
     }
 
+    public int getTimeInSeconds() {
+        int time = 0;
+        time += getHoras() * 3600;
+        time += getMinutos() * 60;
+        time += getSegundos();
+        return time;
+    }
+
     public int getId() {
         return id;
     }

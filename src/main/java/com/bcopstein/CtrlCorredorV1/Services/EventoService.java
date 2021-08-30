@@ -2,6 +2,7 @@ package com.bcopstein.CtrlCorredorV1.Services;
 
 import com.bcopstein.CtrlCorredorV1.Entities.EstatísticasDTO;
 import com.bcopstein.CtrlCorredorV1.Entities.Evento;
+import com.bcopstein.CtrlCorredorV1.Entities.PerformanceDTO;
 import com.bcopstein.CtrlCorredorV1.Repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,31 @@ public class EventoService {
 
     public boolean addEvento(Evento evento) {
         return eventoRepository.addEvento(evento);
+    }
+
+    public PerformanceDTO aumentoPerformance(int distancia, int ano) {
+        List<Evento> eventos = eventoRepository.findByDistanciaAndAno(distancia, ano);
+        return processaListaDeEventos(eventos);
+    }
+
+    private PerformanceDTO processaListaDeEventos(List<Evento> eventos) {
+        String evento1 = "", evento2 = "", aux1 = "", aux2;
+        int melhorPerformance = 0;
+        for (Evento e : eventos) {
+            if (melhorPerformance < 1) {
+                melhorPerformance = e.getTimeInSeconds();
+                aux1 = e.getNome();
+                continue;
+            }
+            aux2 = aux1;
+            aux1 = e.getNome();
+            int aux = melhorPerformance - e.getTimeInSeconds();
+            if (aux > melhorPerformance) {
+                melhorPerformance = aux;
+                evento1 = aux1;
+                evento2 = aux2;
+            }
+        }
+        return new PerformanceDTO(evento1, evento2, melhorPerformance);
     }
 }

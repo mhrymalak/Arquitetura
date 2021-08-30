@@ -5,6 +5,7 @@ import java.util.List;
 import com.bcopstein.CtrlCorredorV1.Entities.Corredor;
 import com.bcopstein.CtrlCorredorV1.Entities.EstatísticasDTO;
 import com.bcopstein.CtrlCorredorV1.Entities.Evento;
+import com.bcopstein.CtrlCorredorV1.Entities.PerformanceDTO;
 import com.bcopstein.CtrlCorredorV1.Repositories.CorredorRepository;
 import com.bcopstein.CtrlCorredorV1.Repositories.EventoRepository;
 import com.bcopstein.CtrlCorredorV1.Services.EventoService;
@@ -52,5 +53,11 @@ public class CorridasController {
     @CrossOrigin(origins = "*")
     public EstatísticasDTO estatisticas(@RequestParam final int distancia){
         return eventoService.estatisticas(distancia);
+    }
+
+    @GetMapping("/aumentoPerformance")
+    @CrossOrigin(origins = "*")
+    public PerformanceDTO aumentoPerformance(@RequestParam final int distancia, @RequestParam final int ano) {
+        return eventoService.aumentoPerformance(distancia, ano);
     }
 }
