@@ -66,6 +66,8 @@ public class EventoService {
         String evento1 = "", evento2 = "", aux1 = "", aux2;
         int melhorPerformance = 0;
         for (Evento e : eventos) {
+
+            // == lógica está errada ==
             if (melhorPerformance < 1) {
                 melhorPerformance = e.getTimeInSeconds();
                 aux1 = e.getNome();
@@ -73,6 +75,8 @@ public class EventoService {
             }
             aux2 = aux1;
             aux1 = e.getNome();
+
+            // == lógica está errada ==
             int aux = melhorPerformance - e.getTimeInSeconds();
             if (aux > melhorPerformance) {
                 melhorPerformance = aux;
