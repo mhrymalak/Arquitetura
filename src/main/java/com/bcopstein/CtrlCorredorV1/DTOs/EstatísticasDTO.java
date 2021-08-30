@@ -1,4 +1,6 @@
-package com.bcopstein.CtrlCorredorV1.Entities;
+package com.bcopstein.CtrlCorredorV1.DTOs;
+
+import com.bcopstein.CtrlCorredorV1.Entities.Evento;
 
 import java.time.LocalTime;
 import java.util.List;

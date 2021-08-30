@@ -1,4 +1,4 @@
-package com.bcopstein.CtrlCorredorV1.Entities;
+package com.bcopstein.CtrlCorredorV1.DTOs;
 
 public class PerformanceDTO {
 

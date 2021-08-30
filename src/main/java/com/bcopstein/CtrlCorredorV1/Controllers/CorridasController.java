@@ -3,11 +3,10 @@ package com.bcopstein.CtrlCorredorV1.Controllers;
 import java.util.List;
 
 import com.bcopstein.CtrlCorredorV1.Entities.Corredor;
-import com.bcopstein.CtrlCorredorV1.Entities.EstatísticasDTO;
+import com.bcopstein.CtrlCorredorV1.DTOs.EstatísticasDTO;
 import com.bcopstein.CtrlCorredorV1.Entities.Evento;
-import com.bcopstein.CtrlCorredorV1.Entities.PerformanceDTO;
+import com.bcopstein.CtrlCorredorV1.DTOs.PerformanceDTO;
 import com.bcopstein.CtrlCorredorV1.Repositories.CorredorRepository;
-import com.bcopstein.CtrlCorredorV1.Repositories.EventoRepository;
 import com.bcopstein.CtrlCorredorV1.Services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
