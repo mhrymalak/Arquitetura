@@ -7,6 +7,7 @@ import com.bcopstein.CtrlCorredorV1.DTOs.EstatísticasDTO;
 import com.bcopstein.CtrlCorredorV1.Entities.Evento;
 import com.bcopstein.CtrlCorredorV1.DTOs.PerformanceDTO;
 import com.bcopstein.CtrlCorredorV1.Repositories.CorredorRepository;
+import com.bcopstein.CtrlCorredorV1.Services.CorredorService;
 import com.bcopstein.CtrlCorredorV1.Services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,25 +16,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/ctrlCorridas")
 public class CorridasController {
 
-    private final CorredorRepository corredorRepository;
+    private final CorredorService corredorService;
     private final EventoService eventoService;
 
     @Autowired
-    public CorridasController(CorredorRepository repository, EventoService eventoService) {
-        this.corredorRepository = repository;
+    public CorridasController(CorredorService corredorService, EventoService eventoService) {
+        this.corredorService = corredorService;
         this.eventoService = eventoService;
     }
 
     @GetMapping("/corredor")
     @CrossOrigin(origins = "*")
     public List<Corredor> consultaCorredor() {
-        return corredorRepository.consultaCorredor();
+        return corredorService.consultaCorredor();
     }
 
     @PostMapping("/corredor")
     @CrossOrigin(origins = "*")
     public boolean cadastraCorredor(@RequestBody final Corredor corredor) {
-        return corredorRepository.cadastraCorredor(corredor);
+        return corredorService.cadastraCorredor(corredor);
     }
 
     @GetMapping("/eventos")
