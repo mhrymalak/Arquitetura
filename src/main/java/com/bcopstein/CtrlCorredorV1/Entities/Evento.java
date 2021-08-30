@@ -1,24 +1,28 @@
 package com.bcopstein.CtrlCorredorV1.Entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
-public class Evento {
+public class Evento implements Comparable<LocalDate> {
     private int id;
     private String nome;
     // Distancia percorrida
     private int distancia; // metros
     // Data e tempo que o corredor levou para percorrer a distancia
-    private LocalDateTime dateTime;
+    private LocalDate data;
+    private LocalTime tempo;
     
     public Evento(int id,String nome, int dia, int mes, int ano, int distancia, int horas, int minutos, int segundos) {
         this.id = id;
         this.nome = nome;
-        this.dateTime = LocalDateTime.of(ano, mes, dia, horas, minutos, segundos);
+        this.data = LocalDate.of(ano, mes, dia);
+        this.tempo = LocalTime.of(horas, minutos, segundos);
         this.distancia = distancia;
     }
 
-    public long getSecondsFromTime() {
-        return dateTime.toLocalTime().toSecondOfDay();
+    public int getSecondsFromTime() {
+        return tempo.toSecondOfDay();
     }
 
     public int getTimeInSeconds() {
@@ -27,6 +31,10 @@ public class Evento {
         time += getMinutos() * 60;
         time += getSegundos();
         return time;
+    }
+
+    public LocalDate getData() {
+        return data;
     }
 
     public int getId() {
@@ -38,15 +46,15 @@ public class Evento {
     }
 
     public int getDia() {
-        return dateTime.getDayOfMonth();
+        return data.getDayOfMonth();
     }
 
     public int getMes() {
-        return dateTime.getMonthValue();
+        return data.getMonthValue();
     }
 
     public int getAno() {
-        return dateTime.getYear();
+        return data.getYear();
     }
 
     public int getDistancia() {
@@ -54,20 +62,25 @@ public class Evento {
     }
 
     public int getHoras() {
-        return dateTime.getHour();
+        return tempo.getHour();
     }
 
     public int getMinutos() {
-        return dateTime.getMinute();
+        return tempo.getMinute();
     }
 
     public int getSegundos() {
-        return dateTime.getSecond();
+        return tempo.getSecond();
     }
 
     @Override
     public String toString() {
         return "Evento [ano=" + getAno() + ", dia=" + getDia() + ", distancia=" + distancia + ", horas=" + getHoras() + ", id=" + id
                 + ", mes=" + getMes() + ", minutos=" + getMinutos() + ", nome=" + nome + ", segundos=" + getSegundos() + "]";
+    }
+
+    @Override
+    public int compareTo(LocalDate o) {
+        return this.data.compareTo(o);
     }
 }

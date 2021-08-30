@@ -59,6 +59,7 @@ public class EventoService {
 
     public PerformanceDTO aumentoPerformance(int distancia, int ano) {
         List<Evento> eventos = eventoRepository.findByDistanciaAndAno(distancia, ano);
+        eventos.sort((date1, date2) -> date1.compareTo(date2.getData()));
         return processaListaDeEventos(eventos);
     }
 
