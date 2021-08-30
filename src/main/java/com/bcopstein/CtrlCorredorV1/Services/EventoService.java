@@ -59,32 +59,7 @@ public class EventoService {
 
     public PerformanceDTO aumentoPerformance(int distancia, int ano) {
         List<Evento> eventos = eventoRepository.findByDistanciaAndAno(distancia, ano);
-        eventos.sort((date1, date2) -> date1.compareTo(date2.getData()));
-        return processaListaDeEventos(eventos);
-    }
-
-    private PerformanceDTO processaListaDeEventos(List<Evento> eventos) {
-        String evento1 = "", evento2 = "", aux1 = "", aux2;
-        int melhorPerformance = 0;
-        for (Evento e : eventos) {
-
-            // == lógica está errada ==
-            if (melhorPerformance < 1) {
-                melhorPerformance = e.getTimeInSeconds();
-                aux1 = e.getNome();
-                continue;
-            }
-            aux2 = aux1;
-            aux1 = e.getNome();
-
-            // == lógica está errada ==
-            int aux = melhorPerformance - e.getTimeInSeconds();
-            if (aux > melhorPerformance) {
-                melhorPerformance = aux;
-                evento1 = aux1;
-                evento2 = aux2;
-            }
-        }
-        return new PerformanceDTO(evento1, evento2, melhorPerformance);
+        eventos.sort((evento1, evento2) -> evento1.compareTo(evento2.getTempo()));
+        return new PerformanceDTO(eventos.get(0).getNome(), eventos.get(1).getNome(), eventos.get(0).getSecondsFromTime() - eventos.get(1).getSecondsFromTime());
     }
 }

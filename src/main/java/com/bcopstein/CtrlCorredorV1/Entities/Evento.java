@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class Evento implements Comparable<LocalDate> {
+public class Evento implements Comparable<LocalTime> {
     private int id;
     private String nome;
     // Distancia percorrida
@@ -35,6 +35,10 @@ public class Evento implements Comparable<LocalDate> {
 
     public LocalDate getData() {
         return data;
+    }
+
+    public LocalTime getTempo() {
+        return tempo;
     }
 
     public int getId() {
@@ -80,7 +84,7 @@ public class Evento implements Comparable<LocalDate> {
     }
 
     @Override
-    public int compareTo(LocalDate o) {
-        return this.data.compareTo(o);
+    public int compareTo(LocalTime o) {
+        return this.tempo.toSecondOfDay() - o.toSecondOfDay();
     }
 }
