@@ -1,7 +1,6 @@
 package com.bcopstein.CtrlCorredorV1.Entities;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Evento implements Comparable<LocalTime> {
@@ -21,16 +20,8 @@ public class Evento implements Comparable<LocalTime> {
         this.distancia = distancia;
     }
 
-    public int getSecondsFromTime() {
+    public int getSegundoDoTempo() {
         return tempo.toSecondOfDay();
-    }
-
-    public int getTimeInSeconds() {
-        int time = 0;
-        time += getHoras() * 3600;
-        time += getMinutos() * 60;
-        time += getSegundos();
-        return time;
     }
 
     public LocalDate getData() {

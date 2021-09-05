@@ -1,15 +1,18 @@
 package com.bcopstein.CtrlCorredorV1.Repositories;
 
 import com.bcopstein.CtrlCorredorV1.Entities.Evento;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class EventoRepositoryImpl {
 
     private JdbcTemplate jdbcTemplate;
-
+    @Autowired
     public EventoRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
 

@@ -1,9 +1,10 @@
 package com.bcopstein.CtrlCorredorV1.Services;
 
-import com.bcopstein.CtrlCorredorV1.DTOs.EstatísticasDTO;
-import com.bcopstein.CtrlCorredorV1.Entities.Evento;
+import com.bcopstein.CtrlCorredorV1.DTOs.EstatisticasDTO;
 import com.bcopstein.CtrlCorredorV1.DTOs.PerformanceDTO;
+import com.bcopstein.CtrlCorredorV1.Entities.Evento;
 import com.bcopstein.CtrlCorredorV1.Repositories.EventoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,33 +21,57 @@ public class EventoService {
         this.eventoRepository = eventoRepository;
     }
 
-    public EstatísticasDTO estatisticas(int distancia) {
+    public EstatisticasDTO estatisticas(int distancia) {
         List<Evento> eventos = eventoRepository.findByDistancia(distancia);
+        eventos.sort((x, y) -> x.compareTo(y.getTempo()));
+        LocalTime media = eventos.size() > 0 ? media(eventos) : null;
+        LocalTime mediana = null;
+        LocalTime desvioPadrao = null;
 
-        LocalTime media = media(eventos);
-        double mediana = mediana(eventos);
-        double desvioPadrao = desvioPadrao(eventos);
-
-        return new EstatísticasDTO(media, mediana, desvioPadrao, eventos);
+        if(media == null)
+            return null;
+        else if(eventos.size() > 1){
+            mediana = mediana(eventos);
+            desvioPadrao = desvioPadrao(eventos, media.toSecondOfDay());
+        }
+        return new EstatisticasDTO(media, mediana, desvioPadrao, eventos);
     }
 
     private LocalTime media(List<Evento> eventos) {
         long segundos = 0;
         for (Evento e : eventos) {
-            segundos += e.getSecondsFromTime();
+            segundos += e.getSegundoDoTempo();
         }
         segundos /= eventos.size();
         return LocalTime.ofSecondOfDay(segundos);
     }
+    
+    private LocalTime mediana(List<Evento> eventos) {
+        int divisao = eventos.size() / 2;
+        LocalTime mediana;
+        Evento evento1 = eventos.get(divisao - 1);
+        Evento evento2 = eventos.get(divisao);
 
-    private double mediana(List<Evento> eventos) {
+        if(eventos.size() % 2 == 0)
+            mediana = LocalTime.ofSecondOfDay((evento1.getSegundoDoTempo() + evento2.getSegundoDoTempo()) / 2);
+        else
+            mediana = evento2.getTempo();
 
-        return 0.0;
+        return mediana;
     }
 
-    private double desvioPadrao(List<Evento> eventos) {
-
-        return 0.0;
+    private LocalTime desvioPadrao(List<Evento> eventos, int media) {
+        double desvio = 0;
+        int desvioFinal;
+        for (Evento evento : eventos) {
+            desvio += Math.pow(evento.getSegundoDoTempo() - media, 2);
+        }
+        desvio /= eventos.size();
+        desvio = Math.sqrt(desvio);
+        String strDesvio = "" + desvio;
+        strDesvio = "" + strDesvio.charAt(strDesvio.length() - 1);
+        desvioFinal = (int)(Double.parseDouble(strDesvio) >= 6 ? Math.ceil(desvio) : Math.floor(desvio));
+        return LocalTime.ofSecondOfDay(desvioFinal);
     }
 
     public List<Evento> findAll() {
@@ -59,7 +84,12 @@ public class EventoService {
 
     public PerformanceDTO aumentoPerformance(int distancia, int ano) {
         List<Evento> eventos = eventoRepository.findByDistanciaAndAno(distancia, ano);
-        eventos.sort((evento1, evento2) -> evento1.compareTo(evento2.getTempo()));
-        return new PerformanceDTO(eventos.get(0).getNome(), eventos.get(1).getNome(), eventos.get(0).getSecondsFromTime() - eventos.get(1).getSecondsFromTime());
+        if(eventos.size() > 1) {
+            eventos.sort((evento1, evento2) -> evento1.compareTo(evento2.getTempo()));
+            Evento evento1 = eventos.get(0);
+            Evento evento2 = eventos.get(1);
+            return new PerformanceDTO(evento1.getNome(), evento2.getNome(), evento1.getSegundoDoTempo() - evento2.getSegundoDoTempo());
+        }
+        return null;
     }
 }

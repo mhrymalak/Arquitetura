@@ -1,7 +1,6 @@
 package com.bcopstein.CtrlCorredorV1.Repositories;
 
 import com.bcopstein.CtrlCorredorV1.Entities.Corredor;
-import com.bcopstein.CtrlCorredorV1.Entities.Evento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
