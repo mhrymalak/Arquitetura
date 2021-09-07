@@ -1,7 +1,7 @@
-package com.bcopstein.CtrlCorredorV1.Services;
+package com.CtrlCorredorV1.Services;
 
-import com.bcopstein.CtrlCorredorV1.Entities.Corredor;
-import com.bcopstein.CtrlCorredorV1.Repositories.CorredorRepository;
+import com.CtrlCorredorV1.Entities.Corredor;
+import com.CtrlCorredorV1.Repositories.CorredorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

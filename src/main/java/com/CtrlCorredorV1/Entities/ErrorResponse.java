@@ -1,4 +1,4 @@
-package com.bcopstein.CtrlCorredorV1.Entities;
+package com.CtrlCorredorV1.Entities;
 
 import java.util.ArrayList;
 

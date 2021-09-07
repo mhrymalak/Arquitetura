@@ -1,14 +1,14 @@
-package com.bcopstein.CtrlCorredorV1.Controllers;
+package com.CtrlCorredorV1.Controllers;
 
 import java.util.List;
 
-import com.bcopstein.CtrlCorredorV1.Entities.Corredor;
-import com.bcopstein.CtrlCorredorV1.Entities.ErrorResponse;
-import com.bcopstein.CtrlCorredorV1.DTOs.EstatisticasDTO;
-import com.bcopstein.CtrlCorredorV1.Entities.Evento;
-import com.bcopstein.CtrlCorredorV1.DTOs.PerformanceDTO;
-import com.bcopstein.CtrlCorredorV1.Services.CorredorService;
-import com.bcopstein.CtrlCorredorV1.Services.EventoService;
+import com.CtrlCorredorV1.Entities.Corredor;
+import com.CtrlCorredorV1.Entities.ErrorResponse;
+import com.CtrlCorredorV1.DTOs.EstatisticasDTO;
+import com.CtrlCorredorV1.Entities.Evento;
+import com.CtrlCorredorV1.DTOs.PerformanceDTO;
+import com.CtrlCorredorV1.Services.CorredorService;
+import com.CtrlCorredorV1.Services.EventoService;
 import com.google.gson.Gson;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +77,7 @@ public class CorridasController {
     public ResponseEntity<String> informaEvento(@RequestBody final Evento evento) {
         boolean response = eventoService.addEvento(evento);
         
-        return response ? ResponseEntity.status(HttpStatus.ACCEPTED).body("Evento cadastrado") : 
+            return response ? ResponseEntity.status(HttpStatus.ACCEPTED).body("Evento cadastrado") : 
             ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Evento não cadastrado");
     }
 
@@ -109,7 +109,7 @@ public class CorridasController {
 
     @GetMapping("/aumentoPerformance")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<String> aumentoPerformance(@RequestParam final int distancia, @RequestParam final int ano) {
+    public ResponseEntity<String> aumentoPerformance(@RequestParam final short distancia, @RequestParam final short ano) {
         PerformanceDTO serviceResponse = eventoService.aumentoPerformance(distancia, ano);
         String response;
 

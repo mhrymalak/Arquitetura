@@ -1,4 +1,4 @@
-package com.bcopstein.CtrlCorredorV1;
+package com.CtrlCorredorV1;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

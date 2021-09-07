@@ -1,6 +1,6 @@
-package com.bcopstein.CtrlCorredorV1.Repositories;
+package com.CtrlCorredorV1.Repositories;
 
-import com.bcopstein.CtrlCorredorV1.Entities.Corredor;
+import com.CtrlCorredorV1.Entities.Corredor;
 
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,9 @@
-package com.bcopstein.CtrlCorredorV1.Services;
+package com.CtrlCorredorV1.Services;
 
-import com.bcopstein.CtrlCorredorV1.DTOs.EstatisticasDTO;
-import com.bcopstein.CtrlCorredorV1.DTOs.PerformanceDTO;
-import com.bcopstein.CtrlCorredorV1.Entities.Evento;
-import com.bcopstein.CtrlCorredorV1.Repositories.EventoRepository;
+import com.CtrlCorredorV1.DTOs.EstatisticasDTO;
+import com.CtrlCorredorV1.DTOs.PerformanceDTO;
+import com.CtrlCorredorV1.Entities.Evento;
+import com.CtrlCorredorV1.Repositories.EventoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,7 +82,7 @@ public class EventoService {
         return eventoRepository.addEvento(evento);
     }
 
-    public PerformanceDTO aumentoPerformance(int distancia, int ano) {
+    public PerformanceDTO aumentoPerformance(int distancia, short ano) {
         List<Evento> eventos = eventoRepository.findByDistanciaAndAno(distancia, ano);
         if(eventos.size() > 1) {
             eventos.sort((evento1, evento2) -> evento1.compareTo(evento2.getTempo()));

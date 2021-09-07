@@ -1,0 +1,2 @@
+INSERT INTO corredores(cpf, nome, genero, data_corredor) VALUES ('10001287','Luiz','masculino', CAST('2002-02-23' AS DATE));
+INSERT INTO eventos(nome, data_evento,tempo,distancia) VALUES('corrida', CAST('2020-7-14' AS DATE), CAST('14:12:00' AS TIME), 3000);
