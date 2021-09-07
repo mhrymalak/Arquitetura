@@ -68,7 +68,9 @@ public class EventoService {
         }
         desvio /= eventos.size();
         desvio = Math.sqrt(desvio);
-        desvioFinal = (int)(desvio % 2 == 0 ? Math.ceil(desvio) : Math.floor(desvio));
+        String strDesvio = "" + desvio;
+        strDesvio = "" + strDesvio.charAt(strDesvio.length() - 1);
+        desvioFinal = (int)(Double.parseDouble(strDesvio) >= 6 ? Math.ceil(desvio) : Math.floor(desvio));
         return LocalTime.ofSecondOfDay(desvioFinal);
     }
 
