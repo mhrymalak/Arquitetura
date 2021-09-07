@@ -1,17 +1,17 @@
 package com.bcopstein.CtrlCorredorV1.Entities;
 
+import java.time.LocalDate;
+
 public class Corredor {
     private String cpf;
     private String nome;
-    private int diaDn,mesDn,anoDn;
+    private LocalDate data;
     private String genero;
 
-    public Corredor(String cpf, String nome, int diaDn,int mesDn,int anoDn, String genero) {
+    public Corredor(String cpf, String nome, byte dia, byte mes, short ano, String genero) {
         this.cpf = cpf;
         this.nome = nome;
-        this.diaDn = diaDn;
-        this.mesDn = mesDn;
-        this.anoDn = anoDn;
+        this.data = LocalDate.of(ano,mes,dia);
         this.genero = genero;
     }
 
@@ -22,16 +22,9 @@ public class Corredor {
     public String getNome() {
         return nome;
     }
-
-    public int getDiaDn() {
-        return diaDn;
-    }
-
-    public int getMesDn() {
-        return mesDn;
-    }
-    public int getAnoDn() {
-        return anoDn;
+   
+    public LocalDate getData() {
+        return data;
     }
 
     public String getGenero() {
