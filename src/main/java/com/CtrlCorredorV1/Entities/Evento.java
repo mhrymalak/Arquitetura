@@ -4,7 +4,9 @@ import java.sql.Time;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+
+import static com.CtrlCorredorV1.Tools.Helper.formato;
+
 public class Evento implements Comparable<LocalTime> {
     private int id;
     private String nome;
@@ -13,7 +15,6 @@ public class Evento implements Comparable<LocalTime> {
     // Data e tempo que o corredor levou para percorrer a distancia
     private LocalDate data;
     private LocalTime tempo;
-    private static final DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Evento(String nome, byte dia, byte mes, short ano, int distancia, byte horas, byte minutos, byte segundos) {
         this.nome = nome;

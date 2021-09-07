@@ -2,14 +2,13 @@ package com.CtrlCorredorV1.Entities;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import static com.CtrlCorredorV1.Tools.Helper.formato;
 
 public class Corredor {
     private String cpf;
     private String nome;
     private LocalDate data;
     private String genero;
-    private static final DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
     public Corredor(String cpf, String nome, byte dia, byte mes, short ano, String genero) {
         this.cpf = cpf;
